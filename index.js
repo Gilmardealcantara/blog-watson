@@ -13,6 +13,8 @@ app.get('/', (req, res) => {
 const routes = require('./routes');
 app.use('/api', routes);
 
+app.use(express.static(__dirname + '/client'));
+
 const port = 3001;
 app.listen(port, () => {
     console.log('Server running on localhost:' + port);
