@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'carbon-components/css/carbon-components.min.css'
+
+import HeaderBlog from './components/HeaderBlog';
+import FooterBlog from './components/FooterBlog';
+import HomeBlog from './components/HomeBlog';
 
 class App extends Component {
   constructor(props) {
     super(props);
     fetch('/posts').then(response => {
-      return response.json();
+      return response.text();
     }).then(data => {
       console.log(data);
     })
 
     fetch('/comments/1').then(response => {
-      return response.json();
+      return response.text();
     }).then(data => {
       console.log(data);
     })
@@ -21,20 +25,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <HeaderBlog />
+        <HomeBlog/>
+        <FooterBlog/>
       </div>
     );
   }
