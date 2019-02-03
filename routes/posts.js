@@ -16,10 +16,10 @@ router.get('/posts', (req, res) => {
     });
 });
 
-router.get('/posts/new', (req, res) => {
+router.post('/post', (req, res) => {
     let conn = Database.getConn();
 
-    conn.query(`INSERT INTO SWR78972.POST (TITLE, CONTENT, AUTHOR) VALUES ('${req.query.title}','${req.query.content}','${req.query.author}')`, (err, data) => {
+    conn.query(`INSERT INTO SWR78972.POST (TITLE, CONTENT, AUTHOR) VALUES ('${req.body.title}','${req.body.content}','${req.body.author}')`, (err, data) => {
         if (err) {
             console.log(err);
         } else {
@@ -28,8 +28,6 @@ router.get('/posts/new', (req, res) => {
         }
         // conn.closeConn();
     });
-
-
 });
 
 module.exports = router;
