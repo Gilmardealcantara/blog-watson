@@ -15,7 +15,12 @@ import SideBarBlog from './components/SideBarBlog';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { posts: null }
+    this.state = { posts: null, addPost: false };
+    this.changeAction = this.changeAction.bind(this);
+  }
+
+  changeAction(state){
+    this.setState({addPost: state});
   }
 
   componentWillMount(){
@@ -38,9 +43,11 @@ class App extends Component {
       <div className="grid">
         <HeaderBlog />
         <div className="body-blog">
-          <SideBarBlog />
-          <HomeBlog posts={this.state.posts} />
-          {/* <PostForm/> */}
+          <SideBarBlog changeAction={this.changeAction} active={this.state.addPost}/>
+          {
+            !this.state.addPost ? <HomeBlog posts={this.state.posts} /> : <PostForm/>
+          }
+          
         </div>
         <FooterBlog />
       </div>
