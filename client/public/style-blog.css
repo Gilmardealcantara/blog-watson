@@ -23,6 +23,7 @@
 
 .content-blog {
     padding: 30px;
+    overflow: scroll;
 }
 
 .footer-blog {

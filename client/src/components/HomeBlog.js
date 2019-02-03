@@ -25,18 +25,19 @@ class HomeBlog extends Component {
 
         return (
             <div className="content-blog">
-                {
-                    this.props.posts.map((post, index) => 
-                        <Card
-                            key={index}
-                            title={post.TITLE}
-                            reveal={<p>Here is some more information about this product that is only revealed once clicked on.</p>}>
-                            <p>{post.CONTENT}</p>
-                            <p></p>
-                            <p><a href="#">{post.AUTHOR}</a></p>
-                        </Card>
-                    )
-                }
+
+                    {
+                        this.props.posts.map((post, index) =>
+                            <Card
+                                key={index}
+                                title={post.TITLE}
+                                reveal={<p>Here is some more information about this product that is only revealed once clicked on.</p>}>
+                                <p>{post.CONTENT}</p>
+                                <p></p>
+                                <p><a href="#">{post.AUTHOR}</a></p>
+                            </Card>
+                        )
+                    }
             </div>
         )
     }
