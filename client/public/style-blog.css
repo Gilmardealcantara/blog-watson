@@ -1,0 +1,25 @@
+.grid {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.body-blog {
+    display: grid;
+    grid-template-columns: 25% auto;
+    height: 100%;
+}
+
+.header-blog {
+}
+
+.sidebar-blog {
+}
+
+.content-blog {
+}
+
+.footer-blog {
+}
