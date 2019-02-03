@@ -12,6 +12,9 @@
     height: 100%;
 }
 
+.form-blog {
+    padding: 30px;
+}
 .header-blog {
 }
 
@@ -19,6 +22,7 @@
 }
 
 .content-blog {
+    padding: 30px;
 }
 
 .footer-blog {
