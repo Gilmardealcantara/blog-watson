@@ -5,7 +5,8 @@ const SideBarBlog = props => {
   return (
     <div className="sidebar-blog">
       <Collection header='First Names'>
-        <CollectionItem>Home</CollectionItem>
+        <CollectionItem>Posts</CollectionItem>
+        <CollectionItem>Add Post</CollectionItem>
       </Collection>
     </div>
   )
