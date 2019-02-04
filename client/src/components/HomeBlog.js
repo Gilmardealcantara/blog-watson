@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Preloader, Chip, Badge, Icon } from 'react-materialize'
+import { Card, Preloader, Chip, Icon, Button } from 'react-materialize'
 
 
 class HomeBlog extends Component {
@@ -15,7 +15,7 @@ class HomeBlog extends Component {
             .then(data => {
                 console.log(data);
                 window.Materialize.toast(data.msg + ' / PostId: ' + data.post, 2000);
-                this.setState({ posts: this.state.posts.filter(e => e.ID != data.post) })
+                this.setState({ posts: this.state.posts.filter(e => e.ID !== data.post) })
             });
     }
 
@@ -55,32 +55,32 @@ class HomeBlog extends Component {
                                 key={post.ID}
                                 title={post.TITLE}
                                 reveal={<p>Here is some more information about this product that is only revealed once clicked on.</p>}
-                                actions={[<a key={post.ID} onClick={this.deletePost.bind(this, post.ID)}>Delete</a>]}>
+                                actions={[<Button key={post.ID} onClick={this.deletePost.bind(this, post.ID)}  className='red' icon='delete'>Delete</Button>]}>
                                 <p>{post.CONTENT}</p>
                                 {
                                     post.NLUJson.entities.map((ent, index) => {
                                         if(ent.sentiment.label === 'positive')
-                                            return <Chip key={index}><Icon tiny>mood</Icon> {`Entity: ${ent.type}/${ent.text}/${ent.relevance}`}</Chip>                                    
+                                            return <Chip key={index}><Icon>mood</Icon> {`Entity: ${ent.type}/${ent.text}/${ent.relevance}`}</Chip>                                    
                                         else if(ent.sentiment.label === 'negative')
-                                            return <Chip key={index}><Icon tiny>mood_bad</Icon> {`Entity: ${ent.type}/${ent.text}/${ent.relevance}`}</Chip>
+                                            return <Chip key={index}><Icon>mood_bad</Icon> {`Entity: ${ent.type}/${ent.text}/${ent.relevance}`}</Chip>
                                         else 
-                                            return <Chip key={index}><Icon tiny>face</Icon> {`Entity: ${ent.type}/${ent.text}/${ent.relevance}`}</Chip>
+                                            return <Chip key={index}><Icon>face</Icon> {`Entity: ${ent.type}/${ent.text}/${ent.relevance}`}</Chip>
                                     })
                                 }
 
                                 {
                                     post.NLUJson.keywords.map((ent, index) => {
                                         if(ent.sentiment.label === 'positive')
-                                            return <Chip key={index}><Icon tiny>mood</Icon> {`keyword: ${ent.text}/${ent.relevance}`}</Chip>                                    
+                                            return <Chip key={index}><Icon>mood</Icon> {`keyword: ${ent.text}/${ent.relevance}`}</Chip>                                    
                                         else if(ent.sentiment.label === 'negative')
-                                            return <Chip key={index}><Icon tiny>mood_bad</Icon> {`keyword: ${ent.text}/${ent.relevance}`}</Chip>
+                                            return <Chip key={index}><Icon>mood_bad</Icon> {`keyword: ${ent.text}/${ent.relevance}`}</Chip>
                                         else 
-                                            return <Chip key={index}><Icon tiny>face</Icon> {`keyword: ${ent.text}/${ent.relevance}`}</Chip>
+                                            return <Chip key={index}><Icon>face</Icon> {`keyword: ${ent.text}/${ent.relevance}`}</Chip>
                                     })
                                 }
 
                                 {/* <p>{post.NLU}</p> */}
-                                <p><a key={post.ID} href="#">{post.AUTHOR}</a></p>
+                                <p> Autor: {post.AUTHOR}</p>
                             </Card>)
                             ;
                     })

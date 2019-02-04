@@ -15,6 +15,7 @@
 .form-blog {
     padding: 30px;
 }
+
 .load-blog {
     display: flex;
     flex: 0 0 auto;
@@ -23,10 +24,12 @@
 }
 
 .sidebar-blog {
+padding: 10px
 }
 
 .content-blog {
     padding: 30px;
+    padding-top: 10px;
     overflow: scroll;
 }
 

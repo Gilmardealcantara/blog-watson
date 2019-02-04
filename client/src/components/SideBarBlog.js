@@ -4,7 +4,7 @@ import {Collection, CollectionItem} from 'react-materialize'
 const SideBarBlog = props => {
   return (
     <div className="sidebar-blog">
-      <Collection header='First Names'>
+      <Collection>
         <CollectionItem href='#' active={!props.active} onClick={() => props.changeAction(false)}>Posts</CollectionItem>
         <CollectionItem href='#' active={props.active} onClick={() => props.changeAction(true)}>Add Post</CollectionItem>
       </Collection>
