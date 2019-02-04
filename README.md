@@ -13,7 +13,7 @@ $ export SECRET_NLU='<SECRET_KEY>'
 ```
 $ export PORT="3001"
 $ npm install
-$ node indexjs # our user nodemon
+$ node indexjs # or use nodemon
 ```
 ### client
 ```
