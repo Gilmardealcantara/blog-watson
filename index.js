@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 
 
 
-if(!process.env.PORT || !process.env.DB2_CONNETION){
+if (!process.env.PORT || !process.env.DB2_CONNETION || !process.env.SECRET_NLU ) {
     console.log('exec: source .enviroment.sh');
     return;
 }
@@ -12,7 +12,7 @@ if(!process.env.PORT || !process.env.DB2_CONNETION){
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
     res.send("Working...");

@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Database = require('../Database');
+const dataAnalyze = require('../NLU');
+
 
 router.get('/posts', (req, res) => {
     let conn = Database.getConn();
@@ -9,7 +11,7 @@ router.get('/posts', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(data);
+            // console.log(data);
             res.json(data);
         }
         // conn.closeConn();c
@@ -17,17 +19,25 @@ router.get('/posts', (req, res) => {
 });
 
 router.post('/post', (req, res) => {
-    let conn = Database.getConn();
-
-    conn.query(`INSERT INTO SWR78972.POST (TITLE, CONTENT, AUTHOR) VALUES ('${req.body.title}','${req.body.content}','${req.body.author}')`, (err, data) => {
-        if (err) {
-            console.log(err);
+    dataAnalyze(req.body.content, (error, response) => {
+        if (error) {
+            console.log(error.error);
+            res.send('Post Analize - Fail: ' + error.error);
         } else {
-            console.log(data);
-            res.send('Post Add - Success');
+            let conn = Database.getConn();
+            console.log(response);
+            conn.query(`INSERT INTO SWR78972.POST (TITLE, CONTENT, AUTHOR, NLU) VALUES ('${req.body.title}','${req.body.content}','${req.body.author}', '${JSON.stringify(response)}')`, (err, data) => {
+                if (err) {
+                    console.log(err);
+                    res.send('Post Add - Fail');
+                } else {
+                    console.log(data);
+                    res.send('Post Add - Success');
+                }
+            });
         }
-        // conn.closeConn();
     });
+
 });
 
 router.delete('/post/:postid', (req, res) => {

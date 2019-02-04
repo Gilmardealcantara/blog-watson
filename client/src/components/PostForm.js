@@ -12,6 +12,20 @@ class PostForm extends Component {
         }
     }
 
+    analyzePost(text){
+        fetch('nlu', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({text: text})
+        }).then( resp => resp.ok ? resp.json(): {})
+        .then(data => {
+            console.log(data.data)
+        });
+    }
+
     submitForm(){
         fetch('post', {
             method: 'POST',
@@ -28,7 +42,7 @@ class PostForm extends Component {
                 author: "",
                 content: ""
             })
-            window.Materialize.toast(data, 2000);
+            window.Materialize.toast(data, 3000);
             this.props.changeAction(false);
         });
     }
