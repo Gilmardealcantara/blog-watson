@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 
 if (!process.env.PORT || !process.env.DB2_CONNETION || !process.env.SECRET_NLU ) {
+    console.log("Enviroment Variables no found (PORT, DB2_CONNETION, SECRET_NLU)")
     console.log('exec: source .enviroment.sh');
     return;
 }
