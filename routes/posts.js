@@ -30,4 +30,16 @@ router.post('/post', (req, res) => {
     });
 });
 
+router.delete('/post/:postid', (req, res) => {
+    let conn = Database.getConn();
+    conn.query(`DELETE FROM SWR78972.POST WHERE ID=${req.params.postid}`, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(data);
+            res.json({ msg: 'Post Deleted - Success', post: req.params.postid });
+        }
+    });
+});
+
 module.exports = router;

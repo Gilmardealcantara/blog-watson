@@ -1,40 +1,61 @@
 import React, { Component } from 'react';
-import { Card } from 'react-materialize'
+import { Row, Col, Card, Preloader } from 'react-materialize'
 
 
 class HomeBlog extends Component {
+    constructor(props){
+        super(props);
+        this.state = {posts: null}
+    }
+    
+    deletePost(id){
+        fetch('post/' + id, {
+            method: 'DELETE'
+        }).then( resp => resp.ok ? resp.json(): {})
+        .then(data => {
+            console.log(data);
+            window.Materialize.toast(data.msg + ' / PostId: ' + data.post, 2000);
+            this.setState({posts: this.state.posts.filter(e => e.ID != data.post)})
+        });
+    }
+
+    componentWillMount() {
+        fetch('/posts').then(response => {
+          return response.ok ? response.json() : [];
+        }).then(posts => {
+          this.setState({ posts })
+          console.log(posts);
+        }).catch(err => {
+            debugger
+        })
+    
+        // fetch('/comments/1').then(response => {
+        //   return response.text();
+        // }).then(data => {
+        //   console.log(data);
+        // })
+      }
 
     render() {
-
-        if (!this.props.posts) {
+        if (!this.state.posts) {
             return (
-                <div>
-                    <p>Waiting..</p>
-                </div>
+            <div className="load-blog">
+                  <Preloader size='big' color="#25a59a" />
+              </div>
             );
-        }
-
-
-        if (this.props.posts.length <= 0) {
-            return (
-                <div>
-                    <p>Erro</p>
-                </div>
-            )
-        }
+          }
 
         return (
             <div className="content-blog">
-
                     {
-                        this.props.posts.map((post, index) =>
+                        this.state.posts.map( post =>
                             <Card
-                                key={index}
+                                Key={post.ID}
                                 title={post.TITLE}
-                                reveal={<p>Here is some more information about this product that is only revealed once clicked on.</p>}>
+                                reveal={<p>Here is some more information about this product that is only revealed once clicked on.</p>}
+                                actions={[<a onClick={this.deletePost.bind(this, post.ID)}>Delete</a>]}>
                                 <p>{post.CONTENT}</p>
-                                <p></p>
-                                <p><a href="#">{post.AUTHOR}</a></p>
+                                <p><a key={post.ID} href="#">{post.AUTHOR}</a></p>
                             </Card>
                         )
                     }

@@ -23,7 +23,13 @@ class PostForm extends Component {
         }).then( resp => resp.ok ? resp.text(): {})
         .then(data => {
             console.log(data);
+            this.setState({
+                title: "",
+                author: "",
+                content: ""
+            })
             window.Materialize.toast(data, 2000);
+            this.props.changeAction(false);
         });
     }
 

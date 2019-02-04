@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'carbon-components/css/carbon-components.min.css'
-import { Row, Col } from 'react-materialize'
 
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
@@ -15,27 +14,12 @@ import SideBarBlog from './components/SideBarBlog';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { posts: null, addPost: false };
+    this.state = { addPost: false };
     this.changeAction = this.changeAction.bind(this);
   }
 
-  changeAction(state){
-    this.setState({addPost: state});
-  }
-
-  componentWillMount(){
-    fetch('/posts').then(response => {
-      return response.ok ? response.json() : [];
-    }).then(posts => {
-      this.setState({ posts })
-      console.log(posts);
-    })
-
-    fetch('/comments/1').then(response => {
-      return response.text();
-    }).then(data => {
-      console.log(data);
-    })
+  changeAction(state) {
+    this.setState({ addPost: state });
   }
 
   render() {
@@ -43,11 +27,11 @@ class App extends Component {
       <div className="grid">
         <HeaderBlog />
         <div className="body-blog">
-          <SideBarBlog changeAction={this.changeAction} active={this.state.addPost}/>
+          <SideBarBlog changeAction={this.changeAction} active={this.state.addPost} />
           {
-            !this.state.addPost ? <HomeBlog posts={this.state.posts} /> : <PostForm/>
+            !this.state.addPost ? <HomeBlog/> : <PostForm changeAction={this.changeAction}/>
           }
-          
+
         </div>
         <FooterBlog />
       </div>

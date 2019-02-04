@@ -15,7 +15,11 @@
 .form-blog {
     padding: 30px;
 }
-.header-blog {
+.load-blog {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
 }
 
 .sidebar-blog {
